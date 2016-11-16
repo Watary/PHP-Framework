@@ -31,9 +31,7 @@ class Router
         }
     }
 
-    public function rules(){
-        self::$routes[] = ['controller' =>  ['', 'main'], 'action' => ['', 'index']];
-
+    private function rules(){
         foreach (self::$routes as $value){
             if($value['controller'][0] == self::$route['controller'] && $value['action'][0] == self::$route['action']){
                 self::$route['controller'] = $value['controller'][1];
@@ -44,6 +42,17 @@ class Router
 
         if(self::$route['action'] == ''){
             self::$route['action'] = 'index';
+        }
+    }
+
+    public function autoLoad($rules){
+        self::addRules($rules);
+        self::rules();
+    }
+
+    public function addRules($rules){
+        foreach ($rules as $value){
+            self::$routes[] = ['controller' =>  $value['controller'], 'action' => $value['action']];
         }
     }
 

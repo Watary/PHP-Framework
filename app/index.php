@@ -10,7 +10,7 @@ require_once dirname(__DIR__) . "/config/config.php";
 require_once _ROUTER_;
 
 $route = new Router($_SERVER['REQUEST_URI']);
-$route->rules();
+$route->autoLoad($rules);
 ?>
 <!doctype html>
 <head>
@@ -22,9 +22,7 @@ $route->rules();
 </head>
 <body>
 
-<pre>
-<?=print_r($route->getRoute(), 1)?>
-</pre>
+<pre>Route = <?=print_r($route->getRoute(), 1)?></pre>
 
 </body>
 </html>
