@@ -10,6 +10,7 @@ require_once dirname(__DIR__) . "/config/config.php";
 require_once _ROUTER_;
 
 $route = new Router($_SERVER['REQUEST_URI']);
+$route->rules();
 ?>
 <!doctype html>
 <head>

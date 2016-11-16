@@ -10,10 +10,10 @@
 class Router
 {
 
-    protected static $routes = [];
-    protected static $route = [];
+    private static $routes = [];
+    private static $route = [];
 
-    public function __construct($url){
+    function __construct($url){
         $request = explode('/', $url);
 
         if(isset($request[1])){
@@ -28,6 +28,22 @@ class Router
 
         foreach ($request as $value){
             if($value) self::$route['params'][] = $value;
+        }
+    }
+
+    public function rules(){
+        self::$routes[] = ['controller' =>  ['', 'main'], 'action' => ['', 'index']];
+
+        foreach (self::$routes as $value){
+            if($value['controller'][0] == self::$route['controller'] && $value['action'][0] == self::$route['action']){
+                self::$route['controller'] = $value['controller'][1];
+                self::$route['action'] = $value['action'][1];
+                return;
+            }
+        }
+
+        if(self::$route['action'] == ''){
+            self::$route['action'] = 'index';
         }
     }
 
