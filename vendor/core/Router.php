@@ -48,6 +48,20 @@ class Router
     public function autoLoad($rules){
         self::addRules($rules);
         self::rules();
+
+        if (file_exists(_APP_ . '/controllers/' . self::$route['controller'] . '.php')) {
+            require_once _APP_ . '/controllers/' . self::$route['controller'] . '.php';
+            $controller = ucfirst(self::$route['controller']);
+            $action = 'action' . ucfirst(self::$route['action']);
+            $oController = new $controller();
+            if(method_exists($oController, $action)){
+                $oController->$action(self::$route['params']);
+            }else{
+                echo "Action not found";
+            }
+        } else {
+            echo "Controller not found";
+        }
     }
 
     public function addRules($rules){
