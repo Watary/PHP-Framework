@@ -6,10 +6,11 @@
  * Date: 17.11.2016
  * Time: 21:27
  */
-class Main {
+
+class Main extends Controller {
 
     function actionIndex($params){
-        echo 'index';
+        $this->render('index', ['var' => 'qwerty']);
         if(isset($params))
             foreach ($params as $key => $value){
                 echo "<br>[$key] => $value";

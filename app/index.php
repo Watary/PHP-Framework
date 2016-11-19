@@ -8,6 +8,7 @@
 
 require_once dirname(__DIR__) . "/config/config.php";
 require_once _ROUTER_;
+require_once _CONTROLLER_;
 
 $route = new Router($_SERVER['REQUEST_URI']);
 $route->autoLoad($rules);

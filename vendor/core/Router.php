@@ -53,7 +53,7 @@ class Router
             require_once _APP_ . '/controllers/' . self::$route['controller'] . '.php';
             $controller = ucfirst(self::$route['controller']);
             $action = 'action' . ucfirst(self::$route['action']);
-            $oController = new $controller();
+            $oController = new $controller(self::$route['controller']);
             if(method_exists($oController, $action)){
                 $oController->$action(self::$route['params']);
             }else{
